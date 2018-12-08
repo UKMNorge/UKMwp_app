@@ -29,6 +29,20 @@ class UKMwpAPI {
 			]
         );
 
+
+        /**
+         * ENDPOINT 5: Innlegg fra kategori
+         */
+        $register = register_rest_route(
+			'UKM', 
+			'/kategori/(?P<id>\d+)', 
+			[
+				'methods' => 'GET',
+				'callback' => ['UKMwpAPI', 'kategori'],
+				'args' => []
+			]
+        );
+
         /**
          * ENDPOINT 1 Info om en gitt post
          */
@@ -117,6 +131,22 @@ class UKMwpAPI {
         }
         
         return $nyheter;
+    }
+
+
+    /**
+     * ENDPOINT 5: Innlegg fra gitt kategori
+     */
+    public static function kategori( $request ) {
+        $innlegg = [];
+        $posts = query_posts('posts_per_page=100&category='. (int)$request->get_param('id') );
+        global $post;
+	    while( have_posts() ) {
+	       the_post();
+	       $innlegg[] = self::_getPostDataFromWPOOPost( new WPOO_Post( $post ) );
+        }
+        
+        return $innlegg;
     }
 
     /**
