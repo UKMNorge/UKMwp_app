@@ -139,7 +139,7 @@ class UKMwpAPI {
      */
     public static function kategori( $request ) {
         $innlegg = [];
-        $posts = query_posts('posts_per_page=100&category='. (int)$request->get_param('id') );
+        $posts = query_posts('posts_per_page=100&cat='. (int)$request->get_param('id') );
         global $post;
 	    while( have_posts() ) {
 	       the_post();
