@@ -103,7 +103,7 @@ class UKMwpAPI {
      */
     public static function informasjonsMeny() {
         if( !get_option('UKM_menu') ) {
-            return '"false"';
+            return 'false';
         }
 
         $menu = wp_get_nav_menu_object( get_option('UKM_menu') );
