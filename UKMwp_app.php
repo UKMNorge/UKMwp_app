@@ -26,6 +26,9 @@ class UKMappWP extends UKMWPmodul {
         self::require( 'api.class.php' );
         add_action( 'rest_api_init', ['UKMwpAPI', 'registerEndpoints'] );
     }
+
+    public static function meny(){
+    }
 }
 
 UKMappWP::init( get_option('pl_id') );
