@@ -10,20 +10,11 @@ Author URI: http://org.ukm.no
 
 require_once('UKM/wp_modul.class.php');
 class UKMappWP extends UKMWPmodul {
-
-    /**
-     * Initier modulen
-     */
-    public static function init($pl_id = null) {
-        parent::init( get_option('pl_id') );
-        parent::setPluginPath( __DIR__ );
-        
-        //self::setAction('home');
-        self::hook();
-    }
+    public static $path_plugin = null;
+    public static $action = null;
 
     public static function hook() {
-        self::require( 'api.class.php' );
+        static::require( 'api.class.php' );
         add_action( 'rest_api_init', ['UKMwpAPI', 'registerEndpoints'] );
     }
 
@@ -31,5 +22,5 @@ class UKMappWP extends UKMWPmodul {
     }
 }
 
-UKMappWP::init( get_option('pl_id') );
+UKMappWP::init( __DIR__ );
 UKMappWP::hook();
